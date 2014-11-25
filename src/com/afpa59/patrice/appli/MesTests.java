@@ -8,7 +8,7 @@ public class MesTests {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	
+		System.out.println("coucou");
 		ServiceArticle serviceA;
 		IuArticle IUArt;
 		
