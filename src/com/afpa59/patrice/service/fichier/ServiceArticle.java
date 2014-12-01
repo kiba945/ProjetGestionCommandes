@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import com.afpa59.patrice.donnees.Article;
 import com.afpa59.patrice.donnees.Entite;
-import com.afpa59.patrice.utils.ES;
 
 public class ServiceArticle extends ServiceBase implements Serializable {
 
@@ -56,7 +55,7 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		//		tabArticle.add(new Article(1,"Disque dur 1To",99));
 		//		tabArticle.add(new Article(2,"Clé USG 8Go",25));
 		//		tabArticle.add(new Article(3,"Carte graphique",600));
-		//		ES.affiche("\n********** CREATION CATALOGUE DE BASE ARTICLE **********\n\n"
+		//		ESconsole.affiche("\n********** CREATION CATALOGUE DE BASE ARTICLE **********\n\n"
 		//				+ "Réussie...\n");
 	}
 
@@ -98,9 +97,7 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		for(int i = 0; i < tabArticle.size(); i++){	
 			if(tabArticle.get(i).getCode() == code){
 				// Modfification de l'article
-				String st = tabArticle.get(i).getDesignation();
 				tabArticle.remove(i);
-				ES.affiche("\n ...SUPPRESSION de l'article "+ st +" Réussie...\n");
 				break;
 			}
 		}

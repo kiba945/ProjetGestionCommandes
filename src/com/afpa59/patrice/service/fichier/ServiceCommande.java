@@ -126,8 +126,8 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 			
 			s = in.readLine();
 			
-//			ES.affiche("date:"+date);
-//			ES.affiche("nouvelle ligne:"+s);
+//			ESconsole.affiche("date:"+date);
+//			ESconsole.affiche("nouvelle ligne:"+s);
 			
 			cde.readData(s);
 

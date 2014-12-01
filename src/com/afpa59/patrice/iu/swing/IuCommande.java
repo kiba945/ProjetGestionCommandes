@@ -17,7 +17,7 @@ import com.afpa59.patrice.service.fichier.ServiceArticle;
 import com.afpa59.patrice.service.fichier.ServiceClient;
 import com.afpa59.patrice.service.fichier.ServiceCommande;
 import com.afpa59.patrice.utils.DateUser;
-import com.afpa59.patrice.utils.ES;
+import com.afpa59.patrice.utils.ESpane;
 
 
 
@@ -144,9 +144,15 @@ public class IuCommande extends IuBase implements ActionListener {
 		//		else if(lib.equals("Affichage Articles Promo")) {  }
 
 		else if(lib.equals("Création/Ajout d'une commande")) { 
-			
+
+			//			ESconsole.affiche("NumOrd: "+s3.getTabCdes().size());
+
 			numOrd= s3.getTabCdes().size()+1;
 			numCde = ""+dateJ.getAnnee()+dateJ.getMois()+dateJ.getJour()+numOrd;
+			
+			/*******************DEBUGING*******************************/
+			ESpane.affiche("Création Cde num: " + numCde);
+			/*******************DEBUGING*******************************/
 			
 			new IuUneCommande(s1,s2, s3);
 		}
@@ -171,33 +177,27 @@ public class IuCommande extends IuBase implements ActionListener {
 		if(tabCdes.taille()>0){
 			effacerCommande(tabCdes);
 		}else{
-			ES.affiche("AUCUNE COMMANDE CREE!!");
+			ESpane.affiche("AUCUNE COMMANDE CREE!!");
 		}
 	}
 
 	public void effacerCommande(ServiceCommande tabCdes){
 		String num;
-		num = ES.saisie("******** SUPPRESSION d'une COMMANDE ********\n\n" +cle(tabCdes)+
+		num = ESpane.saisie("******** SUPPRESSION d'une COMMANDE ********\n\n" +cle(tabCdes)+
 				"\n\n Vous voulez supprimez quelle commande (numero) : \n");
 		Commande Cde = tabCdes.retourner(num);
 		if(Cde != null){
 			//			if(Cde.getEtatFacture()){
-			
-			/****************************DEBUGING*****************************************/
-			
-			ES.affiche(Cde.getCodeCde());
-			
-			/****************************DEBUGING*****************************************/
-			String rep = ES.saisie("Etes- vous certain de vouloir supprimer? (action irréversible) O/N:\n");
+			String rep = ESpane.saisie("Etes- vous certain de vouloir supprimer? (action irréversible) O/N:\n");
 			if(rep.equals("O") || rep.equals("o")){
 				tabCdes.supprimer(Cde);
-				ES.affiche("LA COMMANDE numero "+num+" EST SUPPRIME!\n");
+				ESpane.affiche("LA COMMANDE numero "+num+" EST SUPPRIME!\n");
 			}
 			//			}else{
-			//				ES.affiche("Cette COMMANDE n'est pas encore facturee... Suppression IMPOSSIBLE...");
+			//				ESconsole.affiche("Cette COMMANDE n'est pas encore facturee... Suppression IMPOSSIBLE...");
 			//			}
 		}else{
-			ES.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
+			ESpane.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
 		}
 	}	
 
@@ -206,24 +206,34 @@ public class IuCommande extends IuBase implements ActionListener {
 		if(tabCdes.taille()>0){
 			apercuCommande(tabCdes);
 		}else{
-			ES.affiche("AUCUNE COMMANDE CREE!!");
+			ESpane.affiche("AUCUNE COMMANDE CREE!!");
 		}
 	}
 
 	public void apercuCommande(ServiceCommande tabCdes){
 		String num;
-		num = ES.saisie(cle(tabCdes)+"\n\n Vous voulez editez quelle CDE? (numero) : ");
+		num = ESpane.saisie("******** VISUALISATION DE LA COMMANDE ********\n\n"
+				+ cle(tabCdes)
+				+ "\n\n Vous voulez editez quelle CDE? (numero) : ");
+
 		if(tabCdes.retourner(num) != null){
-			ES.affiche("==> LISTE DES ARTICLES de la Commande \n\nCommande numero: "+num+
-					" Date Cde: "+tabCdes.retourner(num).getDateCde()+ tabCdes.retourner(num).toString());
+
+			ESpane.affiche("==> LISTE DES ARTICLES de la Commande \n\nCommande numero: "
+					+ num
+					+" Date Cde: "
+					+tabCdes.retourner(num).getDateCde()
+					+ tabCdes.retourner(num).toString());
+
 		}else{
-			ES.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
+
+			ESpane.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
+
 		}
 	}
 
 	public void facturerCommande(ServiceCommande tabCdes, ServiceArticle tabArt){		
 		if(tabCdes.taille() == 0){
-			ES.affiche("AUCUNE FACTURE A EDITER");
+			ESpane.affiche("AUCUNE FACTURE A EDITER");
 		}else{
 			editerCommande(tabCdes, tabArt);
 		}
@@ -231,21 +241,26 @@ public class IuCommande extends IuBase implements ActionListener {
 
 	public void editerCommande(ServiceCommande tabCdes, ServiceArticle tabArt){
 		String num;
-		num = ES.saisie(cle(tabCdes)+"\n\n Vous voulez éditer la FACTURE de quelle commande ?" +
+		num = ESpane.saisie(cle(tabCdes)+"\n\n Vous voulez éditer la FACTURE de quelle commande ?" +
 				" (numero) : ");
 		if(tabCdes.retourner(num) != null){
-			ES.affiche("\n"+tabCdes.retourner(num).facturer(tabArt));
+			ESpane.affiche("\n"+tabCdes.retourner(num).facturer(tabArt));
 		}else{
-			ES.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
+			ESpane.affiche("LE COMMANDE numero "+num+" N'EXISTE PAS!");
 		}
 	}
 
 	/*** Méthode visualiserTout qui affiche la liste des commandes ***/	
 	public void visualiserTout(ServiceCommande tabCdes){
 		if(tabCdes.taille()>0){
-			ES.affiche("\n"+tabCdes.toString()+"\n");
+		
+			ESpane.affiche("******** LISTE DES COMMANDES ********\n"
+			+tabCdes.toString()+"\n");
+		
 		}else{
-			ES.affiche("AUCUNE COMMANDE CREE!!");
+			
+			ESpane.affiche("AUCUNE COMMANDE CREE!!");
+		
 		}
 	}	
 
@@ -253,6 +268,8 @@ public class IuCommande extends IuBase implements ActionListener {
 	public static void modifier(ServiceCommande service){
 		// Déclaration des variables
 
+		ESpane.affiche("******** MODIFICATION d'une COMMANDE*********\n"
+				+"           ******** BIENTOT *********\n");	
 	}
 
 }

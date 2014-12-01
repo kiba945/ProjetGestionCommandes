@@ -13,7 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import com.afpa59.patrice.service.fichier.ServiceArticle;
-import com.afpa59.patrice.utils.ES;
+import com.afpa59.patrice.utils.ESpane;
 
 
 
@@ -149,7 +149,7 @@ public class IuArticle extends IuBase implements ActionListener{
 
 		else if(lib.equals("Retour")) { this.dispose();}
 
-		else if(lib.equals("Sauvegarde")) { ES.affiche("Procédure de sauvegarde ici prochainement"); }
+		else if(lib.equals("Sauvegarde")) { ESpane.affiche("Procédure de sauvegarde ici prochainement"); }
 
 		else if(lib.equals("FIN")) { this.dispose(); }
 	}
@@ -160,7 +160,7 @@ public class IuArticle extends IuBase implements ActionListener{
 		char nouveau;
 		do{
 			creerligneArticle(service);
-			nouveau = ES.saisie("Voulez-vous saisir une autre article? (O/N) ").charAt(0);
+			nouveau = ESpane.saisie("Voulez-vous saisir une autre article? (O/N) ").charAt(0);
 		}while(nouveau == 'O' || nouveau == 'o');
 	}
 
@@ -170,17 +170,17 @@ public class IuArticle extends IuBase implements ActionListener{
 		int code;
 		String nom;
 		float prix;
-		code = ES.saisie("\n********** CREATION D'UN ARTICLE ********** \n\n "
-				+"LISTE des ARTICLES EN CATALOGUE\n\n"
-				+service.toString()+
-				"\nSaisir code Produit: ", 1, Integer.MAX_VALUE);
+		code = ESpane.saisie("\n********** CREATION D'UN ARTICLE ********** \n\n "
+				+ "LISTE des ARTICLES EN CATALOGUE\n\n"
+				+ service.toString()
+				+ "\nSaisir code Produit: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) == null){
-			nom = ES.saisie("Désignation: ");
-			prix = ES.saisie("Prix: ", 0F, Float.MAX_VALUE);
+			nom = ESpane.saisie("Désignation: ");
+			prix = ESpane.saisie("Prix: ", 0F, Float.MAX_VALUE);
 			service.creer(code, nom, prix);
-			ES.affiche("L'ARTICLE CODE " + code + " A ETE CREE!\n");
+			ESpane.affiche("L'ARTICLE CODE " + code + " A ETE CREE!\n");
 		}else{
-			ES.affiche("LE CODE ARTICLE " + code + " EXISTE DEJA!\n");
+			ESpane.affiche("LE CODE ARTICLE " + code + " EXISTE DEJA!\n");
 		}
 	}
 
@@ -189,35 +189,50 @@ public class IuArticle extends IuBase implements ActionListener{
 	public static void visualiser(ServiceArticle service){
 		// Déclaration des variables
 		int code;
-		code = ES.saisie("\n********** AFFICHAGE D'UN ARTICLE **********\n\n"
-				+"\nCode Article: ", 1, Integer.MAX_VALUE);
+		code = ESpane.saisie("\n********** AFFICHAGE D'UN ARTICLE **********\n\n"
+				+ "LISTE des ARTICLES EN CATALOGUE\n\n"
+				+ service.toString()
+				+ "\nCode Article: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) != null){
-			ES.affiche(service.retourner(code).toString());
+			ESpane.affiche(service.retourner(code).toString());
 		}else{
-			ES.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
+			ESpane.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
 		}			
 	}
 
 
-	/*** Méthode modifierArticle qui modifie l'article correspondant au code saisie avec une saisie assistée ***/
+	/**
+	 * Méthode modifierArticle qui modifie l'article correspondant
+	 * au code saisie avec une saisie assistée
+	 * 
+	 * @param service du type ServiceArticle
+	 */
 	public static void modifier(ServiceArticle service){
 		// Déclaration des variables
 		int code;
 		String nom;
-		float prix;			
-		code = ES.saisie("\n********** MODIFICATION D'UN ARTICLE **********\n\n"
+		float prix;	
+		
+		code = ESpane.saisie("\n********** MODIFICATION D'UN ARTICLE **********\n\n"
 				+ service.toString()
 				+ "\nCode Article: ", 1, Integer.MAX_VALUE);
+		
+		
 		if(service.retourner(code) != null){
 			//IPaneES.affiche("Ancien nom de l'Article ("+service.retourner(code).getDesignation()+")\n");
-			nom = ES.saisie("Ancien nom de l'Article ("+service.retourner(code).getDesignation()+
-					")\n Nouveau Nom: ");
-			ES.affiche("Ancien prix de l'Article ("+service.retourner(code).getPrix()+")\n");
-			prix = ES.saisie("Ancien prix de l'Article ("+service.retourner(code).getPrix()+
-					")\n Nouveau prix: ", 0F, Float.MAX_VALUE);
+			nom = ESpane.saisie("Ancien nom de l'Article ("
+			+service.retourner(code).getDesignation()
+			+")\n Nouveau Nom: ");
+
+			prix = ESpane.saisie("Ancien prix de l'Article ("+service.retourner(code).getPrix()
+					+")\n Nouveau prix: ", 0F, Float.MAX_VALUE);
+			
 			service.modifier(code, nom, prix);
+		
 		}else{
-			ES.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
+			
+			ESpane.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
+		
 		}		
 	}
 
@@ -225,20 +240,22 @@ public class IuArticle extends IuBase implements ActionListener{
 	/*** Méthode supprimerArticle qui supprime l'article correspondant au code saisie ***/
 	public static void supprimer(ServiceArticle service){
 		int code;
-		code = ES.saisie("\n********** SUPPRESSION D'UN ARTICLE **********\n\n"
+		code = ESpane.saisie("\n********** SUPPRESSION D'UN ARTICLE **********\n\n"
 				+ service.toString()
 				+ "\nCode Article: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) != null){
+			String infoArticle = service.retourner(code).toString();
 			service.supprimer(code);
+			ESpane.affiche("\n ...SUPPRESSION de l'article \n"+ infoArticle +"\nRéussie...\n");
 		}else{
-			ES.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
+			ESpane.affiche("LE CODE ARTICLE " + code + " N'EXISTE PAS!\n");
 		}		
 	}
 
 
 	/*** Méthode visualiserListeArticle qui affiche la liste des articles ***/	
 	public static void visualiserTout(ServiceArticle service){
-		ES.affiche("\n********** LISTE DES ARTICLES **********\n\n"
+		ESpane.affiche("\n********** LISTE DES ARTICLES **********\n\n"
 				+service.toString()+"\n");
 	}
 }

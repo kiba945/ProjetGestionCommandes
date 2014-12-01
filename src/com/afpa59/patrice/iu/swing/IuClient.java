@@ -13,7 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import com.afpa59.patrice.service.fichier.ServiceClient;
-import com.afpa59.patrice.utils.ES;
+import com.afpa59.patrice.utils.ESpane;
 
 
 
@@ -141,73 +141,75 @@ public class IuClient extends IuBase implements ActionListener{
 		char nouveau;
 		do{
 			creerligneClient(service);
-			nouveau = ES.saisie("Voulez-vous saisir un autre client? (O/N) ").charAt(0);
+			nouveau = ESpane.saisie("Voulez-vous saisir un autre client? (O/N) ").charAt(0);
 		}while(nouveau == 'O' || nouveau == 'o');
 	}
 
 	public static void creerligneClient(ServiceClient service){
 		// Déclaration des variables
 		int code;
-		code = ES.saisie("\n********** CREATION d'un nouveau CLIENT ****\n\n"
+		code = ESpane.saisie("\n********** CREATION d'un nouveau CLIENT ****\n\n"
 				+"LISTE des CLIENTS\n\n"
 				+ service.toString()+"\n"
 				+"Saisir code client: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) == null){
-			String nom = ES.saisie("Saisir Nom du client: ");
-			String prenom = ES.saisie("Saisir Prenom du client: ");
-			String adresse = ES.saisie("Saisir Adresse du client: ");
+			String nom = ESpane.saisie("Saisir Nom du client: ");
+			String prenom = ESpane.saisie("Saisir Prenom du client: ");
+			String adresse = ESpane.saisie("Saisir Adresse du client: ");
 			service.creer(code, nom, prenom, adresse);
-			ES.affiche("LE CLIENT " + code + " A ETE CREE!\n");
+			ESpane.affiche("LE CLIENT " + code + " A ETE CREE!\n");
 		}else{
-			ES.affiche("LE CODE CLIENT " + code + " EXISTE DEJA!");
+			ESpane.affiche("LE CODE CLIENT " + code + " EXISTE DEJA!");
 		}
 	}
 	
 	/*** Méthode visualiserClient qui visualise le client correspondant au code saisie  ***/
 	public static void visualiser(ServiceClient service){
-		int code = ES.saisie("\n********** AFFICHAGE D'UN CLIENT ****\n\n"
+		int code = ESpane.saisie("\n********** AFFICHAGE D'UN CLIENT ****\n\n"
 				+ service.toString()+"\n"
 				+"Saisir code client: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) != null){
-			ES.affiche(service.retourner(code).toString());
+			ESpane.affiche(service.retourner(code).toString());
 		}else{
-			ES.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
+			ESpane.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
 		}			
 	}
 
 	/*** Méthode modifierClient qui modifie le client correspondant au code saisie avec une saisie assistée***/
 	public static void modifier(ServiceClient service){
-		int code = ES.saisie("\n********** MODIFICATION d'un CLIENT ****\n\n"
+		int code = ESpane.saisie("\n********** MODIFICATION d'un CLIENT ****\n\n"
 				+ service.toString()+"\n"
 				+"Saisir code client: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) != null){
-			String nom = ES.saisie("Ancien nom du client ("+service.retourner(code).getNom()+")"
+			String nom = ESpane.saisie("Ancien nom du client ("+service.retourner(code).getNom()+")"
 					+"Saisir nouveau Nom: ");
-			String prenom = ES.saisie("Ancien prenom du client ("+service.retourner(code).getPrenom()+")"
+			String prenom = ESpane.saisie("Ancien prenom du client ("+service.retourner(code).getPrenom()+")"
 					+"Saisir nouveau Prenom: ");
-			String adresse = ES.saisie("Ancienne adresse du client ("+service.retourner(code).getAdresse()+")"
+			String adresse = ESpane.saisie("Ancienne adresse du client ("+service.retourner(code).getAdresse()+")"
 					+"Saisir nouvelle Adresse: ");
 			service.modifier(code, nom, prenom, adresse);
 		}else{
-			ES.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
+			ESpane.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
 		}		
 	}
 
 	/*** Méthode supprimerClient qui supprime le client correspondant au code saisie ***/	
 	public static void supprimer(ServiceClient service){
-		int code = ES.saisie("\n********** SUPPRESSION D'UN CLIENT ****\n\n"
+		int code = ESpane.saisie("\n********** SUPPRESSION D'UN CLIENT ****\n\n"
 				+ service.toString()+"\n"
 				+ "Saisir code client: ", 1, Integer.MAX_VALUE);
 		if(service.retourner(code) != null){
+			String infoClt = service.retourner(code).toString();
 			service.supprimer(code);
+			ESpane.affiche("\n ...SUPPRESSION du Client "+ infoClt +" Réussie...\n");
 		}else{
-			ES.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
+			ESpane.affiche("LE CODE CLIENT " + code + " N'EXISTE PAS!");
 		}		
 	}
 
 	/*** Méthode visualiserListeclient qui affiche la liste des clients ***/	
 	public static void visualiserTout(ServiceClient s1){
-		ES.affiche("\n********** LISTE DES CLIENTS **********\n\n"
+		ESpane.affiche("\n********** LISTE DES CLIENTS **********\n\n"
 				+s1.toString() +"\n");
 	}
 

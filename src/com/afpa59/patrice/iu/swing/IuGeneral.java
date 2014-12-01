@@ -8,16 +8,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-
-//import com.afpa59.patrice.service.jdbc.ServiceArticle;
-
 import com.afpa59.patrice.service.fichier.ServiceArticle;
 import com.afpa59.patrice.service.fichier.ServiceClient;
 import com.afpa59.patrice.service.fichier.ServiceCommande;
 import com.afpa59.patrice.utils.ConnectionFichiersArticles;
 import com.afpa59.patrice.utils.ConnectionFichiersClients;
 import com.afpa59.patrice.utils.ConnectionFichiersCommandes;
-import com.afpa59.patrice.utils.ES;
+import com.afpa59.patrice.utils.ESpane;
 
 
 public class IuGeneral extends IuBase implements ActionListener{
@@ -76,7 +73,7 @@ public class IuGeneral extends IuBase implements ActionListener{
 			s3 = new ServiceCommande();
 			mes = mes + "*** TABLE des COMMANDES VIDE ***";
 		}		
-		ES.affiche(mes);		
+		ESpane.affiche(mes);		
 
 
 		Container container = getContentPane(); //getContentPane() permet de créer le container obligatoire
@@ -123,24 +120,24 @@ public class IuGeneral extends IuBase implements ActionListener{
 
 		if (evt.getSource() == b3) { new IuCommande(s1,s2,s3);}
 
-		if (evt.getSource() == b4) { sauvegardeFichiers(nomPhysiqueArticle, nomPhysiqueClient, nomPhysiqueCommande);; System.exit(0);}
+		if (evt.getSource() == b4) { sauvegardeFichiers(nomPhysiqueArticle, nomPhysiqueClient, nomPhysiqueCommande); System.exit(0);}
 
 	}
 
 
 	public void sauvegardeFichiers(String nomPhysiqueArticle, String nomPhysiqueClient, String nomPhysiqueCommande){
 
-		ES.affiche(" Le fichier ARTICLES sera sauvegardé sous le nom suivant: "
+		ESpane.affiche(" Le fichier ARTICLES sera sauvegardé sous le nom suivant: "
 				+ nomPhysiqueArticle);
 		fichArt.ecrire(nomPhysiqueArticle);
 
 
-		ES.affiche(" Le fichier CLIENTS sera sauvegardé sous le  nom suivant: "
+		ESpane.affiche(" Le fichier CLIENTS sera sauvegardé sous le  nom suivant: "
 				+ nomPhysiqueClient);
 		fichClt.ecrire(nomPhysiqueClient);
 
 
-		ES.affiche(" Le fichier COMMANDES sera sauvegardé sous le nom suivant: "
+		ESpane.affiche(" Le fichier COMMANDES sera sauvegardé sous le nom suivant: "
 				+ nomPhysiqueCommande);
 		fichCde.ecrire(nomPhysiqueCommande);
 	}

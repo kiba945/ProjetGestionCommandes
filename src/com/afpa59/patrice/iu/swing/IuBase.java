@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.afpa59.patrice.iu.commun.IuEntite;
 import com.afpa59.patrice.service.commun.ServiceEntite;
 
 

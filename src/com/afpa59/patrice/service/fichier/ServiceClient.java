@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.afpa59.patrice.donnees.Client;
-import com.afpa59.patrice.utils.ES;
 
 public class ServiceClient extends ServiceBase implements Serializable{
 	
@@ -38,7 +37,7 @@ public class ServiceClient extends ServiceBase implements Serializable{
 //		tabClient.add(new Client(1,"SIMPSON","Homer","SPRINGFIELD"));
 //		tabClient.add(new Client(2,"SIMPSON","Marge","SPRINGFIELD"));
 //		tabClient.add(new Client(3,"SIMPSON","Bart","SPRINGFIELD"));
-//		ES.affiche("\n********** CREATION DE LA BASE DE DONNEE CLIENT D'ORIGINE **********\n\n"
+//		ESconsole.affiche("\n********** CREATION DE LA BASE DE DONNEE CLIENT D'ORIGINE **********\n\n"
 //				 + "Réussie...\n");
 	}
 
@@ -81,10 +80,7 @@ public class ServiceClient extends ServiceBase implements Serializable{
 		for(int i = 0; i < tabClient.size(); i++){	
 			if( tabClient.get(i).getCode() == code){
 				// Suppression du client
-				String st = tabClient.get(i).getNom();
-				st = st +" "+ tabClient.get(i).getPrenom();
 				tabClient.remove(i);
-				ES.affiche("\n ...SUPPRESSION du client "+ st +" Réussie...\n");
 				break;
 			 }
 		}

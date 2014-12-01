@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 import com.afpa59.patrice.donnees.Article;
 import com.afpa59.patrice.donnees.Commande;
 import com.afpa59.patrice.donnees.LigneDeCommande;
+
 import com.afpa59.patrice.service.fichier.ServiceArticle;
 import com.afpa59.patrice.service.fichier.ServiceClient;
 import com.afpa59.patrice.service.fichier.ServiceCommande;
-import com.afpa59.patrice.utils.ES;
+
+import com.afpa59.patrice.utils.ESpane;
 
 
 
@@ -63,53 +65,53 @@ public class IuUneCommande extends IuBase implements ActionListener{
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 		barMenu.add(menu);
-		
+
 		SetRaccourci(menuItem, 'C');
 
 		menuItem = new JMenuItem("Suppression d'une ligne de commande");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 		barMenu.add(menu);
-		
+
 		SetRaccourci(menuItem, 'S');
 
 		menuItem = new JMenuItem("Modification d'une ligne de commande");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 		barMenu.add(menu);
-		
+
 		SetRaccourci(menuItem, 'M');
 
 		menuItem= new JMenuItem("Affichage de la commande (en cours)");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 		barMenu.add(menu);	
-		
+
 		SetRaccourci(menuItem, 'V');
 
 		menuItem = new JMenuItem("Retour");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 		barMenu.add(menu);		
-		
+
 		SetRaccourci(menuItem, 'R');
 
-//		menuItem = new JMenuItem("Sauvegarde");
-//		menuItem.addActionListener(this);
-//		menu.add(menuItem);
-//		barMenu.add(menu);
+		//		menuItem = new JMenuItem("Sauvegarde");
+		//		menuItem.addActionListener(this);
+		//		menu.add(menuItem);
+		//		barMenu.add(menu);
 
 		menu = new JMenu(" SUITE ");
 		menu.setMnemonic('S');	//Le menu dispose d'un mnémonique
-		
+
 		menuItem= new JMenuItem("FIN");
 		menuItem.addActionListener(this);
 
 		menu.add(menuItem);
 		barMenu.add(menu);
-		
+
 		SetRaccourci(menuItem, 'F');
-		
+
 		menu.addActionListener(this);
 
 		this.setJMenuBar(barMenu);
@@ -128,10 +130,12 @@ public class IuUneCommande extends IuBase implements ActionListener{
 		//this.show();
 
 	}
+	
+
 	public void actionPerformed(ActionEvent e) {
 
 		String lib = e.getActionCommand();
-
+		String numeroCdeEncours = "";
 
 		if(lib.equals("Création/Ajout d'une ligne de commande")) { creer(s1,s2,s3);}
 
@@ -142,33 +146,59 @@ public class IuUneCommande extends IuBase implements ActionListener{
 		if(lib.equals("Modification d'une ligne de commande")) { modifier(s3);}
 
 
-		if (lib.equals("Affichage de la commande (en cours)")) {visualiser(s3); }		
+		if (lib.equals("Affichage de la commande (en cours)")) {visualiserTout(s3); }		
 
 
 		if(lib.equals("Retour")) { if(s3.retourner(IuCommande.numCde) != null){
+			
+			/*******************DEBUGING*******************************/
+			
+						
+			numeroCdeEncours = IuCommande.numCde;
+			
+			/*******************DEBUGING*******************************/
 			IuCommande.numOrd++;
-			IuCommande.numCde = ""+Cde.getDateCde().getAnnee()+
-					Cde.getDateCde().getMois()+Cde.getDateCde().getJour()+
-					IuCommande.numOrd;
+			IuCommande.numCde = ""+Cde.getDateCde().getAnnee()
+					+Cde.getDateCde().getMois()+Cde.getDateCde().getJour()
+					+IuCommande.numOrd;
+			
 		}
-		ES.affiche("Fin de Traitement de la Commande"); this.dispose();}
+		
+		ESpane.affiche("Fin de Traitement de la Commande\n"
+		+ numeroCdeEncours);
+		this.dispose();}
 		//		
 
-//		if(lib.equals("Sauvegarde")) { }
+		//		if(lib.equals("Sauvegarde")) { }
 
 
 		if(lib.equals("FIN")) { if(s3.retourner(IuCommande.numCde) != null){
+			
+			/*******************DEBUGING*******************************/
+			
+			numeroCdeEncours = IuCommande.numCde;
+			
+			/*******************DEBUGING*******************************/			
+			
 			IuCommande.numOrd++;
-			IuCommande.numCde = ""+Cde.getDateCde().getAnnee()+
-					Cde.getDateCde().getMois()+Cde.getDateCde().getJour()+
-					IuCommande.numOrd;
+			IuCommande.numCde = ""+Cde.getDateCde().getAnnee()
+					+ Cde.getDateCde().getMois()
+					+ Cde.getDateCde().getJour()
+					+ IuCommande.numOrd;
 		}
-		ES.affiche("Fin de Traitement de la Commande"); this.dispose();}
+		ESpane.affiche("Fin de Traitement de la Commande\n"
+		+ numeroCdeEncours);
+		this.dispose();}
 	}
 
 
-	/*** Méthode creer qui cree une commande en mode saisie assitée  ***/
-
+	/**
+	 * Méthode creer qui cree une commande en mode saisie assitée
+	 * 
+	 * @param s1 du type ServiceArticle
+	 * @param s2 du type ServiceClient
+	 * @param s3 du type ServiceCommande
+	 */
 	public static void creer(ServiceArticle s1, ServiceClient s2, ServiceCommande tabCdes){
 		// Déclaration des variables
 		char nouveau;
@@ -186,34 +216,45 @@ public class IuUneCommande extends IuBase implements ActionListener{
 				tabCdes.creer(Cde);
 			}
 
-			nouveau = ES.saisie("Voulez-vous saisir une autre ligne de commande? (O/N) ").charAt(0);
+			nouveau = ESpane.saisie("Voulez-vous saisir une autre ligne de commande? (O/N) ").charAt(0);
 		}while(nouveau == 'O' || nouveau == 'o');
 	}
 
 
+	/**
+	 * Méthode creerLdc qui retourne une ligne de commande
+	 * 
+	 * @param service du type ServiceArticle
+	 * @return LigneDeCommande
+	 */
 	public static LigneDeCommande creerLdc(ServiceArticle s1){
 		// Déclaration des variables
 		LigneDeCommande ldc = new LigneDeCommande();
 
-		int code = ES.saisie("LISTE des ARTICLES EN CATALOGUE\n\n"+s1.toString()+
+		int code = ESpane.saisie("LISTE des ARTICLES EN CATALOGUE\n\n"+s1.toString()+
 				"\nSaisir code Produit: ", 1, Integer.MAX_VALUE);
 
 		Article a = s1.retourner(code);
 
 		if(a!=null){
-			int qte = ES.saisie("Quelle quantite: ", 1, Integer.MAX_VALUE);
+			int qte = ESpane.saisie("Quelle quantite: ", 1, Integer.MAX_VALUE);
 			ldc = new LigneDeCommande(code,qte);
 			return ldc;
 
 		}else{
-			ES.affiche("LE CODE ARTICLE COMMANDE N'EXISTE PAS ....\n");
+			ESpane.affiche("LE CODE ARTICLE COMMANDE N'EXISTE PAS ....\n");
 
 			return ldc=null;
 
 		}
 	}
 
-	/*** Méthode supprimer qui supprime la commande correspondante au code saisie ***/
+
+	/**
+	 * Méthode supprimer qui supprime la ligne de commande
+	 * 
+	 * @param service du type ServiceCommande
+	 */
 	public void supprimer(ServiceCommande tabCdes){
 
 		String num = IuCommande.numCde;
@@ -222,59 +263,130 @@ public class IuUneCommande extends IuBase implements ActionListener{
 			effacerLigne(tabCdes);
 
 		}else{
-			ES.affiche("COMMANDE VIDE!");
+			ESpane.affiche("COMMANDE VIDE!");
 		}
 	}
 
 
+	/**
+	 * Méthode effacerLigne qui supprime une ligne correspondante au code saisie
+	 * 
+	 * @param service du type ServiceCommande
+	 */
 	public void effacerLigne(ServiceCommande tabCdes){
 
 		int lg;
 		String num = IuCommande.numCde;
 
-		lg = ES.saisie("******** SUPPRESSION d'une ligne *********\n\n" +
+		lg = ESpane.saisie("******** SUPPRESSION d'une ligne *********\n\n" +
 				"LISTE DES ARTICLES \n"+tabCdes.retourner(num).toString()+
 				"\n Quel ligne supprimer ? ", 1, Integer.MAX_VALUE);
 
 		if(Cde.taille() >= lg && lg != 0){
 
-			ES.affiche("La ligne n° "+lg+" a été supprimée! \n");
+			ESpane.affiche("La ligne n° "+lg+" a été supprimée! \n");
 			Cde.supprimer(Cde.retourner(lg-1));	
 
 			if(Cde.retourner(0) == null){
 				tabCdes.supprimer(tabCdes.retourner(num));
 			}
-			
+
 		}else{
-			
-			ES.affiche("La ligne n° "+lg+" N'EXISTE PAS!\n");
-			
+
+			ESpane.affiche("La ligne n° "+lg+" N'EXISTE PAS!\n");
+
 		}
 
 	}
 
 
-	/*** Méthode visualiser qui visualise la commande correspondante au code saisie  ***/
-	public static void visualiser(ServiceCommande tabCdes){
+	/**
+	 * Méthode visualiser qui visualise une ligne de commande
+	 * 	 * 
+	 * @param service du type ServiceCommande
+	 */
+	public static void visualiser(ServiceCommande service){
+
 		// Déclaration des variables
 		String num;
 		num=IuCommande.numCde;
-		if(tabCdes.retourner(num) != null){
-			ES.affiche("==> LISTE DES ARTICLES de la Commande \n\nCommande numero: "+num+
-					" Date Cde: "+tabCdes.retourner(num).getDateCde()+tabCdes.retourner(num).toString());
+
+		if(service.retourner(num) != null){
+
+			visualiserLigne(service);
+
 		}else{
-			ES.affiche("COMMANDE VIDE!");		}					
+
+			ESpane.affiche("COMMANDE VIDE!");		
+
+		}
+
 	}
 
-	/*** Méthode modifier qui modifie la commande correspondante au code saisie avec une saisie assistée ***/
+	/**
+	 * Méthode visualiser qui visualise une ligne de commande
+	 * correspondante au numéro de ligne saisie
+	 * 
+	 * @param service du type ServiceCommande
+	 */
+	public static void visualiserLigne(ServiceCommande service){
+
+		// Déclaration des variables
+		String num;
+		num=IuCommande.numCde;
+		int lg;
+
+		lg = ESpane.saisie("******** VISUALISATION d'une ligne *********\n\n" +
+				"LISTE DES LIGNES DES ARTICLES COMMANDEES \n"+service.retourner(num).toString()+
+				"\nQuelle ligne voulez-vous visualiser ? ", 1, Integer.MAX_VALUE);
+
+		if(Cde.taille() >= lg && lg != 0){
+
+			ESpane.affiche("\nLa ligne n° "+lg+" est :\n"
+					+Cde.retourner(lg-1).toString());	
+
+		}else{
+
+			ESpane.affiche("La ligne n° "+lg+" N'EXISTE PAS!\n");
+
+		}		
+	}
+
+	/***  ***/
+	/**
+	 * Méthode modifier qui modifie la commande correspondante
+	 * au code saisie avec une saisie assistée
+	 * 
+	 * @param service du type ServiceCommande
+	 */
 	public static void modifier(ServiceCommande service){
 		// Déclaration des variables
 
+
+		ESpane.affiche("******** MODIFICATION d'une ligne COMMANDE*********\n"	
+				+"           ******** BIENTOT *********\n");	
+
 	}
 
 
-	/*** Méthode visualiserTout qui affiche la liste des commandes ***/	
+	/**
+	 * Méthode visualiserTout qui affiche la liste des articles commandees
+	 * 
+	 * @param service du type ServiceCommande
+	 */
 	public static void visualiserTout(ServiceCommande service){
+		// Déclaration des variables		
+		String num;
+		num=IuCommande.numCde;
+
+		if(service.retourner(num) != null){
+			ESpane.affiche("\n==> LISTE DES ARTICLES de la Commande \n\nCommande numero: "+num+
+					" Date Cde: "+service.retourner(num).getDateCde()+service.retourner(num).toString());
+
+		}else{
+			ESpane.affiche("COMMANDE VIDE!");		
+		}	
 
 	}
+
 }

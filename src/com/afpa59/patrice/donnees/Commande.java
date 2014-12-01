@@ -144,7 +144,7 @@ public class Commande extends Entite{
 		}
 		
 
-		//		ES.affiche(" code cde: "
+		//		ESconsole.affiche(" code cde: "
 		//				+ codeCde
 		//				+ " num ligne: "
 		//				+ numlig
@@ -180,11 +180,11 @@ public class Commande extends Entite{
 		
 		//		st = codeCde;
 
-		//		ES.affiche(st);
+		//		ESconsole.affiche(st);
 
 		for (int i = 0; i < listeCde.size(); i++) {
 
-			//			ES.affiche("taille de listCde: "+listeCde.size());
+			//			ESconsole.affiche("taille de listCde: "+listeCde.size());
 
 			st = st 
 					//					+ "|" 
@@ -197,7 +197,7 @@ public class Commande extends Entite{
 
 		out.println(st);
 
-		//		ES.affiche(st);
+		//		ESconsole.affiche(st);
 		/* **************** DEBUG ********************** */
 	}
 
