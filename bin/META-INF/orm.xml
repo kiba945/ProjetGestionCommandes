@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd">
+
+	<description>The minimal mappings for a persistent entity in XML. </description>
+
+	<mapped-superclass name="Entite" class="org.afpa59.patrice.donnees.Entite" access="FIELD">
+
+		<attributes>
+		
+			<id name="code">
+				<column name="code" />
+<!-- 				strategy possible AUTO, IDENTITY, SEQUENCE -->
+				<generated-value strategy="IDENTITY" />
+			</id>
+			
+		</attributes>
+
+	</mapped-superclass>
+
+
+	<entity name="Article" class="org.afpa59.patrice.donnees.Article" access="FIELD">
+
+		<attributes>
+
+			<basic name="designation">
+				<column name="designation" />
+			</basic>
+			
+			<basic name="prix">
+				<column name="prix" />
+			</basic>
+			
+		</attributes>
+
+	</entity>
+
+	<entity name="Client" class="org.afpa59.patrice.donnees.Client" access="FIELD">
+
+		<attributes>
+
+			<basic name="nom">
+				<column name="nom" />
+			</basic>
+
+			<basic name="prenom">
+				<column name="prenom" />
+			</basic>
+
+			<basic name="adresse">
+				<column name="adresse" />
+			</basic>
+
+			<one-to-many name="commandes" mapped-by="clt">
+				<map-key-join-column name="code_client"/>
+			</one-to-many>
+
+		</attributes>
+
+	</entity>
+
+	<entity name="Commande" class="org.afpa59.patrice.donnees.Commande"	access="FIELD">
+
+		<attributes>
+
+			<basic name="codeCde">
+				<column name="code_cde" />
+			</basic>
+			
+			<many-to-one name="clt" /> 
+
+			
+			<one-to-many name="listeCde" mapped-by="cde">
+				<join-column name="code_commande"/>
+			</one-to-many>						
+
+			<basic name="montantCommande">
+				<column name="montantcommande" />
+			</basic>
+
+		</attributes>
+
+	</entity>
+	
+		<entity name="LigneDeCommande" class="org.afpa59.patrice.donnees.LigneDeCommande"	access="FIELD">
+
+		<attributes>
+
+			<basic name="quantite">
+				<column name="quantite" />
+			</basic>
+
+			<many-to-one name="art">
+<!-- 				<column name="code_article" /> -->
+			</many-to-one>
+
+			<many-to-one name="cde">
+<!-- 				<column name="code_commande" /> -->
+			</many-to-one>
+
+		</attributes>
+
+	</entity>
+
+</entity-mappings>

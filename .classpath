@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/hsqldb-2.3.2/hsqldb/lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/eclipselink-2.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/javax.persistence-2.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
