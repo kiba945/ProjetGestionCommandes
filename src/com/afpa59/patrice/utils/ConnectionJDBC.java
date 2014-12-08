@@ -7,14 +7,14 @@ import java.sql.Statement;
 
 public class ConnectionJDBC {
 
-	private Connection conn;
+	private Connection connect;
 
 	/**
 	 * Méthode Connecter qui établit 
 	 * 
 	 * @return Statement
 	 */
-	public Statement Connecter() {
+	public Connection Connecter() {
 
 		String st;
 
@@ -28,13 +28,14 @@ public class ConnectionJDBC {
 			String user = "SA";
 			String passwd = "";
 
-			conn = DriverManager.getConnection(url, user, passwd);
+			connect = DriverManager.getConnection(url, user, passwd);
 			st= st+"Connexion effective !";  
 			
-			//Création d'un objet Statement
-			Statement state = conn.createStatement();
+//			//Création d'un objet Statement
+//			Statement state = connect.createStatement();
 			
-			return state;
+			
+			return connect;
 
 		} catch (ClassNotFoundException e) {
 			ES.affiche("Exception levéee dans Connecter...\n");
@@ -47,6 +48,13 @@ public class ConnectionJDBC {
 		return null;
 	}
 
+	public void lire() {
+		
+	}
+	
+	public void ecrire() {
+		
+	}
 	
 //	public Statement SuperMethode() throws ClassNotFoundException,SQLException {
 //		String st;
@@ -70,18 +78,18 @@ public class ConnectionJDBC {
 //	}
 
 
-	public void fermerConnectionJDBC(){
-
-		try{
-
-			conn.close();
-
-		}catch (Exception e){
-
-			ES.affiche("Exception levéee dans fermerConnectionJDBC...\n");
-
-		}
-
-	}
+//	public void fermerConnectionJDBC(){
+//
+//		try{
+//
+//			connect.close();
+//
+//		}catch (Exception e){
+//
+//			ES.affiche("Exception levéee dans fermerConnectionJDBC...\n");
+//
+//		}
+//
+//	}
 
 }

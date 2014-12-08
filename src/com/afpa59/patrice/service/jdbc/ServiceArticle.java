@@ -1,17 +1,14 @@
 package com.afpa59.patrice.service.jdbc;
 
 import com.afpa59.patrice.donnees.Article;
-import com.afpa59.patrice.donnees.Entite;
-import com.afpa59.patrice.service.fichier.ServiceBase;
-
+import com.afpa59.patrice.service.jdbc.ServiceBase;
 import com.afpa59.patrice.service.jdbc.ServiceArticle;
-
 import com.afpa59.patrice.utils.ConnectionJDBC;
 import com.afpa59.patrice.utils.ES;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,6 +27,17 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 
 	/************************************/
+	/*		Déclaration des SETTERS	*/
+	/************************************/
+	/**
+	 * @param tabArticle
+	 */
+	public void setTabArticle(ArrayList<Article> tabArticle) {
+		this.tabArticle = tabArticle;
+	}
+
+
+	/************************************/
 	/*		Déclaration des GETTERS	*/
 	/************************************/
 	/**
@@ -44,13 +52,13 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	/*** 1er constructeur ***/
 	public ServiceArticle(){
 		// Création d'un tableau d'article de base
-//		Article a1 = new Article(1,"Disque dur 1To",99);
-//		Article a2 = new Article(2,"Clé USB 8Go",25);
-//		Article a3 = new Article(3,"Carte graphique",600);
-//
-//		tabArticle.add(a1);
-//		tabArticle.add(a2);
-//		tabArticle.add(a3);	
+		//		Article a1 = new Article(1,"Disque dur 1To",99);
+		//		Article a2 = new Article(2,"Clé USB 8Go",25);
+		//		Article a3 = new Article(3,"Carte graphique",600);
+		//
+		//		tabArticle.add(a1);
+		//		tabArticle.add(a2);
+		//		tabArticle.add(a3);	
 	}
 
 	/************************************/
@@ -68,51 +76,57 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 	/*** Méthode creer qui a en paramétre un code, un nom, un prix
 	 *  et qui crée l'article ***/	
-	public void creer(int code, String nom, float prix){
-		ConnectionJDBC connect = new ConnectionJDBC();
-		
-		
-		try {
-			Statement state;
-			state = connect.Connecter();
-			
-			// Création d'un article
-			tabArticle.add(new Article(code,nom,prix));
+	/**
+	 * @param nom
+	 * @param prix
+	 */
+	public void creer(String nom, float prix){
 
-			String monInsert="INSERT INTO Article (code,designation,prix) VALUES ("
-					+code+","
-					+ "'"
-					+ nom
-					+ "'"
-					+ ","
-					+ prix
-					+ ")";
-			
-			ResultSet result;
-			result=state.executeQuery(monInsert);
-			ES.affiche("\n ...CREATION Réussie...\n");
+		ResultSet result;
+		Statement state;
+		ConnectionJDBC JDBC = new ConnectionJDBC();
+
+		try {
+
+			Connection connec = JDBC.Connecter();
+			state = connec.createStatement();
 
 			//L'objet ResultSet contient le résultat de la requête SQL
 			String monSelect = "SELECT * FROM Article";
+
 			result = state.executeQuery(monSelect);	
+
+			String monInsert="INSERT INTO Article (designation,prix) VALUES ( "
+					+ "'"
+					+ nom
+					+ "'"
+					+ ", "
+					+ prix
+					+ ")";			
+
+			result = state.executeQuery(monInsert);
 			
-			
+			readData();
 
 			result.close();			
-			state.close();
-			connect.fermerConnectionJDBC();
-			
+			connec.close();
+
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 
 	}
 
+
 	/*** Méthode visualiser qui a en paramétre un code
 	 *  et affiche l'article correspondant ***/	
 	public void visualiser(int code){
-		if(retourner(code) != null){  
+
+		if(retourner(code) != null){	
 			retourner(code).toString();
 		}
 	}
@@ -126,10 +140,50 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	/*** Méthode modifier qui a en paramétre un code, un nom, un prix
 	 *  et qui modifie l'article correspondant ***/	
 	public void modifier(int code, String nom, float prix){
+
+		ResultSet result;
+		Statement state;
+		ConnectionJDBC JDBC = new ConnectionJDBC();
+
 		for(int i = 0; i < tabArticle.size(); i++){	
+
 			if(tabArticle.get(i).getCode() == code){
-				// Modfification de l'article
-				tabArticle.set(i, new Article(code,nom,prix)); break;
+
+				try {
+
+					Connection connec = JDBC.Connecter();
+					state = connec.createStatement();
+
+					String monUpdate="UPDATE Article"
+							+ " SET"
+							+ " designation="
+							+ "'"
+							+ nom
+							+ "'"
+							+ ", prix="
+							+ prix
+							+ " WHERE"
+							+ " code="
+							+ code;
+
+					System.out.println(monUpdate);
+
+					result=state.executeQuery(monUpdate);
+
+					// Modification d'un article
+					readData();
+
+					result.close();			
+					connec.close();
+
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+
 			}
 		}		
 	}
@@ -163,82 +217,97 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	public String toString(){
 		String st = new String();
 		for(Article art : tabArticle){
-			st =st + art.toString() + "\n";
+			st = st + art.toString() + "\n";
 		}
 		return st;
 	}
-	
-	
-	
-	/**
-	* Lit un tableau d'articles à partir d’un lecteur bufférisé
-	* 
-	* @param in Le lecteur bufférisé
-	* @return Le tableau d’articles
-	*/
-//	public ArrayList<Article> readData(BufferedReader in) throws IOException{
-//		
-//		String st;
-//		int code;
-//		String designation;
-//		Float prix;
-//		
-//		while((st=in.readLine())!=null){
-//
-//			/*  **************************************************************  */
-//			
-////			article.readData(s);			
-//			
-//			StringTokenizer t = new StringTokenizer(st, "|");
-//			
-//			code = Integer.parseInt(t.nextToken());
-//			designation = t.nextToken();
-//			
-//			prix = Float.parseFloat(t.nextToken());	
-//			Article article = new Article(code,designation,prix);
-//			/*  **************************************************************  */	
-//			
-//			tabArticle.add(article);
-//		}
-//		
-//		return tabArticle;
-//	}
 
-	
+
+
 	/**
-	* Ecrit tous les articles dans un tableau vers un printWriter
-	* @param tabArticle Un tableau d’articles
-	* @param out Un printWriter
+	 * Lit un tableau d'articles à partir d’un lecteur bufférisé
+	 * 
+	 * @param in Le lecteur bufférisé
+	 * @return Le tableau d’articles
 	 */
-	public void writeData(PrintWriter out){
-//		// TODO Auto-generated method stub
-//		
-//		// écrire le nombre d'articles
-//		//out.println(tabArticle.size());
-//
-//		for (int i = 0; i < tabArticle.size(); i++){
-////			tabArticle.get(i).writeData(out);
-//			
-//			out.println(tabArticle.get(i).getCode()
-//					+"|"+tabArticle.get(i).getDesignation()
-//					+"|"+tabArticle.get(i).getPrix());
-//		}
+	public ArrayList<Article> readData() throws IOException{
+
+		int code;
+		String designation;
+		Float prix;
+		
+		/***************************************************/
+		tabArticle = new ArrayList<Article>();
+		/***************************************************/
+		
+		ResultSet result;
+		Statement state;
+		ConnectionJDBC JDBC = new ConnectionJDBC();
+
+		try {
+
+			Connection connec = JDBC.Connecter();
+
+			//L'objet ResultSet contient le résultat de la requête SQL
+			String monSelect = "SELECT * FROM Article";
+
+			state = connec.createStatement();
+
+			result = state.executeQuery(monSelect);					
+
+			while(result.next()){
+
+				code = result.getInt(1);
+				designation = result.getString(2);
+				prix = result.getFloat(3);
+
+				Article article = new Article(code,designation,prix);
+
+				tabArticle.add(article);
+
+			}
+
+			result.close();			
+			connec.close();
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		/*  **************************************************************  */	
+
+		return tabArticle;
 	}
-	
-	
-	
+
+
 	/**
-	* Ecrit tous les articles dans un tableau vers un printWriter
-	* @param tabArticle Un tableau d’articles
-	* @param out Un printWriter
+	 * Ecrit tous les articles dans un tableau vers un printWriter
+	 * @param tabArticle Un tableau d’articles
+	 * @param out Un printWriter
 	 */
-	public void writeData(ArrayList<Entite> tabArticle, PrintWriter out) throws IOException{}
-	
+	public void writeData(){
+		//
+		//		for (int i = 0; i < tabArticle.size(); i++){
+		//
+		//
+		//		}
+	}
+
+
+
 	/**
-	* Lit un tableau d'articles à partir d’un lecteur bufférisé
-	* @param in Le lecteur bufférisé
-	* @return Le tableau d’articles
+	 * Ecrit tous les articles dans un tableau vers un printWriter
+	 * @param tabArticle Un tableau d’articles
+	 * @param out Un printWriter
 	 */
-//	public ArrayList<Entite> readData(BufferedReader in) throws IOException{ }
-	
+	//	public void writeData(ArrayList<Entite> tabArticle, PrintWriter out) throws IOException{}
+
+	/**
+	 * Lit un tableau d'articles à partir d’un lecteur bufférisé
+	 * @param in Le lecteur bufférisé
+	 * @return Le tableau d’articles
+	 */
+	//	public ArrayList<Entite> readData(BufferedReader in) throws IOException{ }
+
 }
