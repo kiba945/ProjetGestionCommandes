@@ -59,6 +59,9 @@ public interface ServiceEntite {
 	public void writeData(ArrayList<Entite> tabEntite, PrintWriter out) 
 			throws IOException;
 
+
+	void writeData();
+
 	/**
 	 * @param in
 	 * @return

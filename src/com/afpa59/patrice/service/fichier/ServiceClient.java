@@ -136,5 +136,10 @@ public class ServiceClient extends ServiceBase implements Serializable{
 			tabClient.get(i).writeData(out);
 		}
 	}
+
+	public void writeData() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

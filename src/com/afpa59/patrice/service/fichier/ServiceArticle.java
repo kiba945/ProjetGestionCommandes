@@ -168,6 +168,12 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	* @param out Un printWriter
 	 */
 	public void writeData(ArrayList<Entite> tabArticle, PrintWriter out) throws IOException{}
+
+
+	public void writeData() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/**
 	* Lit un tableau d'articles à partir d’un lecteur bufférisé

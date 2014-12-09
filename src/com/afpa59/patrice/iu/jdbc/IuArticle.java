@@ -28,6 +28,9 @@ public class IuArticle extends IuBase implements ActionListener{
 
 
 
+	/**
+	 * @param s1
+	 */
 	public IuArticle(ServiceArticle s1){	
 
 		this.s1= s1;
@@ -130,6 +133,9 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.afpa59.patrice.iu.jdbc.IuBase#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		String lib = e.getActionCommand();
@@ -155,7 +161,11 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
-	/*** Méthode creerArticle qui cree un article en mode saisie assitée  ***/
+	/**
+	 * Méthode creerArticle qui cree un article en mode saisie assitée
+	 * 
+	 * @param service
+	 */
 	public static void creer(ServiceArticle service){
 		char nouveau;
 		do{
@@ -165,6 +175,11 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
+	/**
+	 * Méthode creerligneArticle
+	 * 
+	 * @param service
+	 */
 	public static void creerligneArticle(ServiceArticle service){
 		// Déclaration des variables
 //		int code;
@@ -191,7 +206,11 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
-	/*** Méthode visualiserArticle qui visualise l'article correspondant au code saisie  ***/
+	/**
+	 * Méthode visualiserArticle qui visualise l'article correspondant au code saisie
+	 * 
+	 * @param service
+	 */
 	public static void visualiser(ServiceArticle service){
 		// Déclaration des variables
 		int code;
@@ -243,7 +262,12 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
-	/*** Méthode supprimerArticle qui supprime l'article correspondant au code saisie ***/
+
+	/**
+	 * Méthode supprimerArticle qui supprime l'article correspondant au code saisie
+	 * 
+	 * @param service
+	 */
 	public static void supprimer(ServiceArticle service){
 		int code;
 		code = ESpane.saisie("\n********** SUPPRESSION D'UN ARTICLE **********\n\n"
@@ -259,7 +283,11 @@ public class IuArticle extends IuBase implements ActionListener{
 	}
 
 
-	/*** Méthode visualiserListeArticle qui affiche la liste des articles ***/	
+	/**
+	 * Méthode visualiserListeArticle qui affiche la liste des articles
+	 * 
+	 * @param service
+	 */
 	public static void visualiserTout(ServiceArticle service){
 		ESpane.affiche("\n********** LISTE DES ARTICLES **********\n\n"
 				+service.toString()+"\n");

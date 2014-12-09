@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import com.afpa59.patrice.donnees.Article;
 import com.afpa59.patrice.donnees.Entite;
 import com.afpa59.patrice.service.commun.ServiceEntite;
 
@@ -66,6 +67,11 @@ public abstract class ServiceBase implements ServiceEntite{
 		
 	}
 	
+	public void supprimer(int code) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public void supprimer(Entite entite){
 		
 	}
@@ -88,14 +94,27 @@ public abstract class ServiceBase implements ServiceEntite{
 		@param out Un printWriter
 	 */
 	public void writeData(ArrayList<Entite> tabEntite, PrintWriter out) throws IOException{
-		// écrire le nombre d'articles
-		out.println(tabEntite.size());
-		
-		for (int i = 0; i < tabEntite.size(); i++){
-			tabEntite.get(i).writeData(out);
-		}
+//		// écrire le nombre d'articles
+//		out.println(tabEntite.size());
+//		
+//		for (int i = 0; i < tabEntite.size(); i++){
+//			tabEntite.get(i).writeData(out);
+//		}
 	}
 
+
+
+	public ArrayList<Article> readData() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public void writeData() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 	/**

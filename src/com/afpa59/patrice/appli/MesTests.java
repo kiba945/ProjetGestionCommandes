@@ -23,13 +23,8 @@ public class MesTests {
 			e.printStackTrace();
 		}
 		
-//		serviceA.creer(9, "BAP - One Shot",1);
-		
 		IUArt = new IuArticle(serviceA);
 		
-//		IUArt.creer(serviceA);
-		
-//		IUArt.visualiserTout(serviceA);
 		
 		
 		

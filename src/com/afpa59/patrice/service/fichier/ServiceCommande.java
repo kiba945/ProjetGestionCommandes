@@ -185,6 +185,10 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 //		}
 		/* *************************************************** */	
 	}
+	public void writeData() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

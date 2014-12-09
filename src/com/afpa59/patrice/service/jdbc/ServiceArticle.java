@@ -16,13 +16,10 @@ import java.util.ArrayList;
 
 public class ServiceArticle extends ServiceBase implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	/****************************************/
 	/* Déclaration des variables d'instance */
 	/****************************************/
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Article> tabArticle = new ArrayList<Article>();
 
 
@@ -50,33 +47,23 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	/*	Déclaration des constructeurs	*/
 	/************************************/
 	/*** 1er constructeur ***/
-	public ServiceArticle(){
-		// Création d'un tableau d'article de base
-		//		Article a1 = new Article(1,"Disque dur 1To",99);
-		//		Article a2 = new Article(2,"Clé USB 8Go",25);
-		//		Article a3 = new Article(3,"Carte graphique",600);
-		//
-		//		tabArticle.add(a1);
-		//		tabArticle.add(a2);
-		//		tabArticle.add(a3);	
-	}
+	public ServiceArticle(){	}
 
 	/************************************/
 	/*		Déclaration des méthodes	*/
 	/************************************/
-	/*** Méthode creer() crée 3 articles  ***/
-	public void creer(){
-		// Création d'un tableau d'article de base
-		//		tabArticle.add(new Article(1,"Disque dur 1To",99));
-		//		tabArticle.add(new Article(2,"Clé USG 8Go",25));
-		//		tabArticle.add(new Article(3,"Carte graphique",600));
-		//		ES.affiche("\n********** CREATION CATALOGUE DE BASE ARTICLE **********\n\n"
-		//				+ "Réussie...\n");
-	}
-
-	/*** Méthode creer qui a en paramétre un code, un nom, un prix
-	 *  et qui crée l'article ***/	
 	/**
+	 * Méthode creer()
+	 * 
+	 */
+	@Override
+	public void creer(){	}
+
+	
+	/**
+	 * Méthode creer qui a en paramétre un nom, un prix
+	 * et qui crée l'article
+	 * 
 	 * @param nom
 	 * @param prix
 	 */
@@ -122,8 +109,13 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	}
 
 
-	/*** Méthode visualiser qui a en paramétre un code
-	 *  et affiche l'article correspondant ***/	
+	/**
+	 * Méthode visualiser qui a en paramétre un code
+	 * et affiche l'article correspondant
+	 * 
+	 * @param code
+	 */
+	@Override
 	public void visualiser(int code){
 
 		if(retourner(code) != null){	
@@ -131,14 +123,28 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		}
 	}
 
-	/*** Méthode modifier qui a en paramétre un code
-	 *  et qui modifie l'article correspondant ***/	
+	/*** 
+	 *   ***/	
+	/**
+	 * Méthode modifier qui a en paramétre un code
+	 * et qui modifie l'article correspondant
+	 * 
+	 * @param code
+	 */
+	@Override
 	public void modifier(int code){
 		// Utile pour l'écran de saisie
 	}
 
-	/*** Méthode modifier qui a en paramétre un code, un nom, un prix
-	 *  et qui modifie l'article correspondant ***/	
+
+	/**
+	 * Méthode modifier qui a en paramétre un code, un nom, un prix
+	 * et qui modifie l'article correspondant
+	 * 
+	 * @param code
+	 * @param nom
+	 * @param prix
+	 */
 	public void modifier(int code, String nom, float prix){
 
 		ResultSet result;
@@ -166,8 +172,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 							+ " code="
 							+ code;
 
-					System.out.println(monUpdate);
-
 					result=state.executeQuery(monUpdate);
 
 					// Modification d'un article
@@ -187,23 +191,68 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 			}
 		}		
 	}
+	
 
-	/*** Méthode supprimer qui a en paramétre un code
-	 * et qui supprime l'article correspondant ***/
+
+	/**
+	 * Méthode supprimer qui a en paramétre un code
+	 * et qui supprime l'article correspondant
+	 * 
+	 * @param code
+	 */
+	@Override
 	public void supprimer(int code){
-		for(int i = 0; i < tabArticle.size(); i++){	
-			if(tabArticle.get(i).getCode() == code){
-				// Modfification de l'article
-				String st = tabArticle.get(i).getDesignation();
-				tabArticle.remove(i);
-				ES.affiche("\n ...SUPPRESSION de l'article "+ st +" Réussie...\n");
-				break;
-			}
-		}
-	}
+		
+		ResultSet result;
+		Statement state;
+		ConnectionJDBC JDBC = new ConnectionJDBC();
 
-	/*** Méthode retourner qui a en paramétre un code 
-	 * et qui retourne l'article correspondant ***/
+		for(int i = 0; i < tabArticle.size(); i++){	
+
+			if(tabArticle.get(i).getCode() == code){
+
+				try {
+
+					Connection connec = JDBC.Connecter();
+					state = connec.createStatement();
+
+					String monDelete="DELETE FROM "
+							+ "Article"
+							+ " WHERE"
+							+ " code="
+							+ code;
+
+					System.out.println(monDelete);
+
+					result=state.executeQuery(monDelete);
+
+					// Suppression de l'article dans la liste
+					tabArticle.remove(i);
+
+					result.close();			
+					connec.close();
+					break;
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+			}
+			
+		}		
+			
+	}
+	
+
+
+	/**
+	 * Méthode retourner qui a en paramétre un code 
+	 * et qui retourne l'article correspondant
+	 * 
+	 * @param code
+	 * @return Article
+	 */
+	@Override
 	public Article retourner(int code){
 		for(Article art : tabArticle){ // For ... each utile pour consultation pas pour modification
 			if(art !=  null && art.getCode() == code){	
@@ -213,7 +262,15 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		return null;
 	}	
 
-	/*** Méthode toString() retourne une chaîne de caractère  ***/
+	/***   ***/
+	
+	/**
+	 * Méthode toString() retourne une chaîne de caractère
+	 * 
+	 * @param code
+	 * @return String
+	 */
+	@Override
 	public String toString(){
 		String st = new String();
 		for(Article art : tabArticle){
@@ -225,11 +282,11 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 
 	/**
-	 * Lit un tableau d'articles à partir d’un lecteur bufférisé
+	 * Lit la table Article de la base de donnée et créer une liste d'articles
 	 * 
-	 * @param in Le lecteur bufférisé
-	 * @return Le tableau d’articles
+	 * @return une liste d'articles
 	 */
+	@Override
 	public ArrayList<Article> readData() throws IOException{
 
 		int code;
@@ -283,9 +340,11 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 	/**
 	 * Ecrit tous les articles dans un tableau vers un printWriter
+	 * 
 	 * @param tabArticle Un tableau d’articles
 	 * @param out Un printWriter
 	 */
+	@Override
 	public void writeData(){
 		//
 		//		for (int i = 0; i < tabArticle.size(); i++){
