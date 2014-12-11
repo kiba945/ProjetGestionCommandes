@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import com.afpa59.patrice.donnees.Article;
+import com.afpa59.patrice.donnees.Client;
 import com.afpa59.patrice.donnees.Entite;
 import com.afpa59.patrice.service.commun.ServiceEntite;
 
@@ -104,10 +105,10 @@ public abstract class ServiceBase implements ServiceEntite{
 
 
 
-	public ArrayList<Article> readData() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public ArrayList<Entite> readData() throws IOException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 

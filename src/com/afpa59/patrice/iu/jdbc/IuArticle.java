@@ -162,7 +162,7 @@ public class IuArticle extends IuBase implements ActionListener{
 
 
 	/**
-	 * Méthode creerArticle qui cree un article en mode saisie assitée
+	 * Méthode creer qui cree un article en mode saisie assitée
 	 * 
 	 * @param service
 	 */
@@ -182,14 +182,8 @@ public class IuArticle extends IuBase implements ActionListener{
 	 */
 	public static void creerligneArticle(ServiceArticle service){
 		// Déclaration des variables
-//		int code;
 		String nom;
 		float prix;
-		
-		
-//		code = ESpane.saisie("\n********** CREATION D'UN ARTICLE **********\n\n"
-//				+ service.toString()
-//				+ "\nCode Article: ", 1, Integer.MAX_VALUE);
 		
 		nom = ESpane.saisie("\n********** CREATION D'UN ARTICLE **********\n\n"
 				+ service.toString()
@@ -199,7 +193,9 @@ public class IuArticle extends IuBase implements ActionListener{
 //			nom = ESpane.saisie("Désignation: ");
 			prix = ESpane.saisie("Prix: ", 0F, Float.MAX_VALUE);
 			service.creer(nom, prix);
-			ESpane.affiche("\n ...CREATION Réussie...\n");
+			ESpane.affiche("L'ARTICLE "
+			+ nom
+			+ " A ETE CREE!\n");
 //		}else{
 //			ESpane.affiche("LE CODE ARTICLE " + code + " EXISTE DEJA!\n");
 //		}
@@ -207,7 +203,7 @@ public class IuArticle extends IuBase implements ActionListener{
 
 
 	/**
-	 * Méthode visualiserArticle qui visualise l'article correspondant au code saisie
+	 * Méthode visualiser qui affiche l'article correspondant au code saisie
 	 * 
 	 * @param service
 	 */
@@ -227,7 +223,7 @@ public class IuArticle extends IuBase implements ActionListener{
 
 
 	/**
-	 * Méthode modifierArticle qui modifie l'article correspondant
+	 * Méthode modifier qui modifie l'article correspondant
 	 * au code saisie avec une saisie assistée
 	 * 
 	 * @param service du type ServiceArticle

@@ -25,6 +25,9 @@ public class IuClient extends IuBase implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	ServiceClient s2; // pour récupérer les services lors du premier appel
 	
+	/**
+	 * @param s2
+	 */
 	public IuClient(ServiceClient s2){		
 		this.s2=s2;
 		
@@ -108,6 +111,10 @@ public class IuClient extends IuBase implements ActionListener{
 		//this.show();
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.afpa59.patrice.iu.jdbc.IuBase#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		String lib = e.getActionCommand();
@@ -136,7 +143,11 @@ public class IuClient extends IuBase implements ActionListener{
 		
 	}
 
-	/*** Méthode creerClient qui cree un client en mode saisie assitée  ***/
+	/**
+	 * Méthode creer qui cree un client en mode saisie assitée
+	 * 
+	 * @param service
+	 */
 	public static void creer(ServiceClient service){
 		char nouveau;
 		do{
@@ -145,25 +156,41 @@ public class IuClient extends IuBase implements ActionListener{
 		}while(nouveau == 'O' || nouveau == 'o');
 	}
 
+	/**
+	 * Méthode creerligneClient
+	 * 
+	 * @param service
+	 */
 	public static void creerligneClient(ServiceClient service){
 		// Déclaration des variables
-		int code;
-		code = ESpane.saisie("\n********** CREATION d'un nouveau CLIENT ****\n\n"
-				+"LISTE des CLIENTS\n\n"
+		String nom;
+		String prenom;
+		String adresse;
+		
+		nom = ESpane.saisie("\n********** CREATION d'un nouveau CLIENT ****\n\n"
+				+ "LISTE des CLIENTS\n\n"
 				+ service.toString()+"\n"
-				+"Saisir code client: ", 1, Integer.MAX_VALUE);
-		if(service.retourner(code) == null){
-			String nom = ESpane.saisie("Saisir Nom du client: ");
-			String prenom = ESpane.saisie("Saisir Prenom du client: ");
-			String adresse = ESpane.saisie("Saisir Adresse du client: ");
-			service.creer(code, nom, prenom, adresse);
-			ESpane.affiche("LE CLIENT " + code + " A ETE CREE!\n");
-		}else{
-			ESpane.affiche("LE CODE CLIENT " + code + " EXISTE DEJA!");
-		}
+				+ "Saisir Nom du client: ");
+//		if(service.retourner(code) == null){
+			prenom = ESpane.saisie("Saisir Prenom du client: ");
+			adresse = ESpane.saisie("Saisir Adresse du client: ");
+			service.creer(nom, prenom, adresse);
+			ESpane.affiche("LE CLIENT "
+			+ nom
+			+ " "
+			+ prenom
+			+ " A ETE CREE!\n");
+//		}else{
+//			ESpane.affiche("LE CODE CLIENT " + code + " EXISTE DEJA!");
+//		}
 	}
 	
-	/*** Méthode visualiserClient qui visualise le client correspondant au code saisie  ***/
+	
+	/**
+	 * Méthode visualiser qui affiche le client correspondant au code saisie
+	 * 
+	 * @param service
+	 */
 	public static void visualiser(ServiceClient service){
 		int code = ESpane.saisie("\n********** AFFICHAGE D'UN CLIENT ****\n\n"
 				+ service.toString()+"\n"
@@ -175,7 +202,13 @@ public class IuClient extends IuBase implements ActionListener{
 		}			
 	}
 
-	/*** Méthode modifierClient qui modifie le client correspondant au code saisie avec une saisie assistée***/
+
+	/**
+	 * Méthode modifier qui modifie le client correspondant 
+	 * au code saisie avec une saisie assistée
+	 * 
+	 * @param service
+	 */
 	public static void modifier(ServiceClient service){
 		int code = ESpane.saisie("\n********** MODIFICATION d'un CLIENT ****\n\n"
 				+ service.toString()+"\n"
@@ -193,7 +226,12 @@ public class IuClient extends IuBase implements ActionListener{
 		}		
 	}
 
-	/*** Méthode supprimerClient qui supprime le client correspondant au code saisie ***/	
+
+	/**
+	 * Méthode supprimer qui supprime le client correspondant au code saisie
+	 * 
+	 * @param service
+	 */
 	public static void supprimer(ServiceClient service){
 		int code = ESpane.saisie("\n********** SUPPRESSION D'UN CLIENT ****\n\n"
 				+ service.toString()+"\n"
@@ -207,7 +245,12 @@ public class IuClient extends IuBase implements ActionListener{
 		}		
 	}
 
-	/*** Méthode visualiserListeclient qui affiche la liste des clients ***/	
+
+	/**
+	 * Méthode visualiserListeclient qui affiche la liste des clients
+	 * 
+	 * @param s1
+	 */
 	public static void visualiserTout(ServiceClient s1){
 		ESpane.affiche("\n********** LISTE DES CLIENTS **********\n\n"
 				+s1.toString() +"\n");

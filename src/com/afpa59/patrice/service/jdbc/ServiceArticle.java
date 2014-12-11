@@ -24,6 +24,17 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 
 	/************************************/
+	/*		Déclaration des GETTERS	*/
+	/************************************/
+	/**
+	 * @return tabArticle la liste des articles
+	 */
+	public ArrayList<Article> getTabArticle() {
+		return tabArticle;
+	}
+	
+
+	/************************************/
 	/*		Déclaration des SETTERS	*/
 	/************************************/
 	/**
@@ -32,16 +43,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	public void setTabArticle(ArrayList<Article> tabArticle) {
 		this.tabArticle = tabArticle;
 	}
-
-
-	/************************************/
-	/*		Déclaration des GETTERS	*/
-	/************************************/
-	/**
-	 * @return tabArticle la liste d'article
-	 */
-	public ArrayList<Article> getTabArticle() {return tabArticle;}
-
 
 	/************************************/
 	/*	Déclaration des constructeurs	*/
@@ -57,7 +58,9 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	 * 
 	 */
 	@Override
-	public void creer(){	}
+	public void creer(){
+		
+	}
 
 	
 	/**
@@ -83,7 +86,15 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 
 			result = state.executeQuery(monSelect);	
 
-			String monInsert="INSERT INTO Article (designation,prix) VALUES ( "
+			String monInsert="INSERT INTO "
+					+ "Article"
+					+ " ("
+					+ "designation"
+					+ ","
+					+ "prix"
+					+ ")"
+					+ " VALUES "
+					+ "("
 					+ "'"
 					+ nom
 					+ "'"
@@ -123,8 +134,7 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		}
 	}
 
-	/*** 
-	 *   ***/	
+
 	/**
 	 * Méthode modifier qui a en paramétre un code
 	 * et qui modifie l'article correspondant
@@ -166,7 +176,8 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 							+ "'"
 							+ nom
 							+ "'"
-							+ ", prix="
+							+ ","
+							+ "prix="
 							+ prix
 							+ " WHERE"
 							+ " code="
@@ -222,8 +233,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 							+ " code="
 							+ code;
 
-					System.out.println(monDelete);
-
 					result=state.executeQuery(monDelete);
 
 					// Suppression de l'article dans la liste
@@ -261,8 +270,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		}
 		return null;
 	}	
-
-	/***   ***/
 	
 	/**
 	 * Méthode toString() retourne une chaîne de caractère
@@ -286,7 +293,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 	 * 
 	 * @return une liste d'articles
 	 */
-	@Override
 	public ArrayList<Article> readData() throws IOException{
 
 		int code;
@@ -332,8 +338,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 			e1.printStackTrace();
 		}
 
-		/*  **************************************************************  */	
-
 		return tabArticle;
 	}
 
@@ -352,7 +356,6 @@ public class ServiceArticle extends ServiceBase implements Serializable {
 		//
 		//		}
 	}
-
 
 
 	/**

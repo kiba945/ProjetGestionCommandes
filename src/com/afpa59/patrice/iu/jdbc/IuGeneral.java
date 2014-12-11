@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -48,6 +49,16 @@ public class IuGeneral extends IuBase implements ActionListener{
 //		s1 = fichArt.getTab();
 //		s2 = fichClt.getTab();
 //		s3 = fichCde.getTab();
+		
+//		try {
+//			s1.readData();
+//			s2.readData();
+//			s3.readData();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 
 		String mes;
 
@@ -104,7 +115,7 @@ public class IuGeneral extends IuBase implements ActionListener{
 		container.add(b4);
 
 
-		this.setSize(800,750); //LARGEUR * HAUTEUR de la frame
+		this.setSize(1000,1000); //LARGEUR * HAUTEUR de la frame
 		this.setMinimumSize(new Dimension(550, 550)); // Définir une taille de fenetre minimum		
 		this.setLocationRelativeTo(null); // pour centrer le container
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
