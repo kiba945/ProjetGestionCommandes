@@ -16,23 +16,25 @@ public class MesTests {
 		// TODO Auto-generated method stub
 		ServiceArticle serviceA;
 		ServiceClient serviceClt;
+		ServiceCommande serviceCde;
 		
-		IuArticle IUArt;
-		IuClient IuClt;		
+		IuArticle IuArt;
+		IuClient IuClt;	
+		IuCommande IuCde;
 		
 
 		/************** TEST MODULE GESTION ARTICLES***************************/	
-//		serviceA = new ServiceArticle();
-//
-//		try {
-//			serviceA.readData();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println("EXCEPTION Test MODULE GESTION Articles");
-//			e.printStackTrace();
-//		}
-//
-//		IUArt = new IuArticle(serviceA);
+		serviceA = new ServiceArticle();
+
+		try {
+			serviceA.readData();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("EXCEPTION Test MODULE GESTION Articles");
+			e.printStackTrace();
+		}
+
+		IuArt = new IuArticle(serviceA);
 		/********************************************************************/		
 
 		/************** TEST MODULE GESTION CLIENTS***************************/	
@@ -48,6 +50,22 @@ public class MesTests {
 		}
 
 		IuClt = new IuClient(serviceClt);
+		/**********************************************************************/		
+
+		/************** TEST MODULE GESTION COMMANDES***************************/	
+		serviceCde = new ServiceCommande();
+		
+
+		try {
+			serviceCde.readData();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("EXCEPTION Test MODULE GESTION Commandes");
+			e.printStackTrace();
+			
+		}
+
+		IuCde = new IuCommande(serviceA, serviceClt, serviceCde);
 		/**********************************************************************/		
 
 	}

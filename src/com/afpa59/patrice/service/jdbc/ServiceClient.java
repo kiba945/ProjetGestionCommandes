@@ -1,9 +1,7 @@
 package com.afpa59.patrice.service.jdbc;
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,6 +11,7 @@ import java.util.ArrayList;
 
 import com.afpa59.patrice.donnees.Client;
 import com.afpa59.patrice.utils.ConnectionJDBC;
+import com.afpa59.patrice.utils.ES;
 
 public class ServiceClient extends ServiceBase implements Serializable{
 
@@ -21,27 +20,6 @@ public class ServiceClient extends ServiceBase implements Serializable{
 	/****************************************/
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Client> tabClient = new ArrayList<Client>();
-
-
-	/************************************/
-	/*		Déclaration des GETTERS	*/
-	/************************************/
-	/**
-	 * @return tabClient la liste des clients
-	 */
-	public ArrayList<Client> getTabClient() {
-		return tabClient;
-	}
-
-	/************************************/
-	/*		Déclaration des SETTERS	*/
-	/************************************/
-	/**
-	 * @param tabClient
-	 */
-	public void setTabClient(ArrayList<Client> tabClient) {
-		this.tabClient = tabClient;
-	}
 
 	/************************************/
 	/*	Déclaration des constructeurs	*/
@@ -52,8 +30,31 @@ public class ServiceClient extends ServiceBase implements Serializable{
 	}
 
 	/************************************/
+	/*		Déclaration des GETTERS		*/
+	/************************************/
+	/**
+	 * Méthode getTabClient
+	 * 
+	 * @return tabClient la liste des clients
+	 */
+	public ArrayList<Client> getTabClient() {
+		return tabClient;
+	}
+
+	/************************************/
+	/*		Déclaration des SETTERS		*/
+	/************************************/
+	/**
+	 * @param tabClient
+	 */
+	public void setTabClient(ArrayList<Client> tabClient) {
+		this.tabClient = tabClient;
+	}
+
+	/************************************/
 	/*		Déclaration des méthodes	*/
 	/************************************/
+
 	/**
 	 * Méthode creer()
 	 * 
@@ -83,11 +84,6 @@ public class ServiceClient extends ServiceBase implements Serializable{
 
 			Connection connec = JDBC.Connecter();
 			state = connec.createStatement();
-
-			//L'objet ResultSet contient le résultat de la requête SQL
-			String monSelect = "SELECT * FROM Client";
-
-			result = state.executeQuery(monSelect);	
 
 			String monInsert="INSERT INTO "
 					+ "Client"
@@ -314,6 +310,7 @@ public class ServiceClient extends ServiceBase implements Serializable{
 		String nom;
 		String prenom;
 		String adresse;
+		String mes;
 
 		/***************************************************/
 		tabClient = new ArrayList<Client>();
@@ -358,6 +355,8 @@ public class ServiceClient extends ServiceBase implements Serializable{
 
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
+			mes = "Connection impossible. Veuillez contacter l'adminstrateur.";
+			ES.affiche(mes);
 			e1.printStackTrace();
 		}
 
