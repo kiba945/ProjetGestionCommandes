@@ -15,7 +15,7 @@ public class ES {
 			}catch (NumberFormatException e){
 				affiche("SAISIE NON NUMERIQUE \n RESSAISSEZ SVP");
 			}
-		}while(true);
+		}while(true); 
 		return ent;
 	}
 	

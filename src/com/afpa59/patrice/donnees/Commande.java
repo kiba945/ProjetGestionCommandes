@@ -22,6 +22,18 @@ public class Commande extends Entite{
 	private DateUser dateFact;
 	private boolean etatFacture;
 
+	/***********************CLIENT*********************************/
+	private int codeClt;
+	
+	public int getCodeClt() {
+		return codeClt;
+	}
+	public void setCodeClt(int codeClt) {
+		this.codeClt = codeClt;
+	}
+
+	/**************************************************************/
+	
 	private ArrayList<LigneDeCommande> listeCde = new ArrayList<LigneDeCommande>();
 
 
@@ -31,10 +43,18 @@ public class Commande extends Entite{
 	/*** 1er constructeur ***/
 	public Commande(){}
 	/*** 2ème constructeur avec des paramètres ***/
-	public Commande(String code, DateUser dateCde, ArrayList<LigneDeCommande> Cde){
+//	public Commande(String code, DateUser dateCde, ArrayList<LigneDeCommande> Cde){
+//		//		super.getCode();
+//		this.codeCde=code;
+//		this.dateCde=dateCde;
+//		this.listeCde=Cde;
+//	}
+	/*** 3ème constructeur avec des paramètres ***/
+	public Commande(String code, DateUser dateCde, int codeClient, ArrayList<LigneDeCommande> Cde){
 		//		super.getCode();
 		this.codeCde=code;
 		this.dateCde=dateCde;
+		this.codeClt=codeClient;
 		this.listeCde=Cde;
 	}
 
@@ -96,8 +116,8 @@ public class Commande extends Entite{
 		String pied = "";
 
 		for(int i=0;i<taille();i++){
-			details = details+listeCde.get(i).facturer(tabArt);
-			prixTotalCde=prixTotalCde+listeCde.get(i).prixTotal(tabArt);
+//			details = details+listeCde.get(i).facturer(tabArt);
+//			prixTotalCde=prixTotalCde+listeCde.get(i).prixTotal(tabArt);
 		}
 
 		pied=pied+"\n ** TOTAL HORS TAXE : "+prixTotalCde+

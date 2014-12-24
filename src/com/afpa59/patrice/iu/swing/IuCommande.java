@@ -17,6 +17,7 @@ import com.afpa59.patrice.service.fichier.ServiceArticle;
 import com.afpa59.patrice.service.fichier.ServiceClient;
 import com.afpa59.patrice.service.fichier.ServiceCommande;
 import com.afpa59.patrice.utils.DateUser;
+import com.afpa59.patrice.utils.ES;
 import com.afpa59.patrice.utils.ESpane;
 
 
@@ -31,6 +32,7 @@ public class IuCommande extends IuBase implements ActionListener {
 	static DateUser dateJ = new DateUser();
 	static int numOrd;
 	static String numCde;
+	static int numClient;
 
 	ServiceArticle s1; // pour récupérer les services lors du premier appel
 	ServiceClient s2; // pour récupérer les services lors du premier appel
@@ -150,6 +152,8 @@ public class IuCommande extends IuBase implements ActionListener {
 			numOrd= s3.getTabCdes().size()+1;
 			numCde = ""+dateJ.getAnnee()+dateJ.getMois()+dateJ.getJour()+numOrd;
 			
+			numClient = ES.saisie("Veuillez choisir le client", 1, Integer.MAX_VALUE);
+			
 			/*******************DEBUGING*******************************/
 			ESpane.affiche("Création Cde num: " + numCde);
 			/*******************DEBUGING*******************************/
@@ -221,7 +225,7 @@ public class IuCommande extends IuBase implements ActionListener {
 			ESpane.affiche("==> LISTE DES ARTICLES de la Commande \n\nCommande numero: "
 					+ num
 					+" Date Cde: "
-					+tabCdes.retourner(num).getDateCde()
+					+ tabCdes.retourner(num).getDateCde()
 					+ tabCdes.retourner(num).toString());
 
 		}else{

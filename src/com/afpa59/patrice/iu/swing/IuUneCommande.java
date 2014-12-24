@@ -212,6 +212,7 @@ public class IuUneCommande extends IuBase implements ActionListener{
 
 			if(ldc != null){
 				Cde.setCodeCde(IuCommande.numCde);
+				Cde.setCodeClt(IuCommande.numClient);
 				Cde.ajouter(ldc);
 				tabCdes.creer(Cde);
 			}
