@@ -1,20 +1,16 @@
 package com.afpa59.patrice.service.jdbc;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.afpa59.patrice.donnees.Commande;
 import com.afpa59.patrice.utils.ConnectionJDBC;
-import com.afpa59.patrice.utils.DateUser;
 import com.afpa59.patrice.utils.ES;
 
 

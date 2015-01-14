@@ -43,13 +43,6 @@ public class Commande extends Entite{
 	/*** 1er constructeur ***/
 	public Commande(){}
 	/*** 2ème constructeur avec des paramètres ***/
-//	public Commande(String code, DateUser dateCde, ArrayList<LigneDeCommande> Cde){
-//		//		super.getCode();
-//		this.codeCde=code;
-//		this.dateCde=dateCde;
-//		this.listeCde=Cde;
-//	}
-	/*** 3ème constructeur avec des paramètres ***/
 	public Commande(String code, DateUser dateCde, int codeClient, ArrayList<LigneDeCommande> Cde){
 		//		super.getCode();
 		this.codeCde=code;
@@ -151,33 +144,20 @@ public class Commande extends Entite{
 		StringTokenizer t = new StringTokenizer(ligCommande, "|");
 
 		/* **************** DEBUG ********************** */
-		System.out.println("Je suis dans de la classse Commande"
-				+ " dans la méthode readData()");
-		codeCde= t.nextToken();
-
+//		System.out.println("Je suis dans de la classse Commande"
+//				+ " dans la méthode readData()");
+		
 		//		numlig=  Integer.parseInt(t.nextToken());
+		/* **************** DEBUG ********************** */
+		
+		codeCde= t.nextToken();
 
 		while(t.hasMoreTokens()){	
 			codeArt= Integer.parseInt(t.nextToken());
 			qteArt= Integer.parseInt(t.nextToken());
 			ajouter(new LigneDeCommande(codeArt,qteArt));
 		}
-		
 
-		//		ESconsole.affiche(" code cde: "
-		//				+ codeCde
-		//				+ " num ligne: "
-		//				+ numlig
-		//				+ " code Article: "
-		//				+ codeArt
-		//				+ " qte commandée: "
-		//				+ qteArt
-		//				+ " ");
-
-		//		listeCde.set(numlig, new LigneDeCommande(codeArt,qteArt));
-
-
-		/* **************** DEBUG ********************** */
 	}	
 
 	/**
@@ -190,8 +170,8 @@ public class Commande extends Entite{
 
 		/* **************** DEBUG ********************** */
 		String st="";
-		System.out.println("Je suis dans de la classe Commande"
-				+ " dans la méthode writeData()");		
+//		System.out.println("Je suis dans de la classe Commande"
+//				+ " dans la méthode writeData()");		
 
 
 

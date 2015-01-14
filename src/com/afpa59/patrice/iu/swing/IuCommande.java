@@ -17,7 +17,6 @@ import com.afpa59.patrice.service.fichier.ServiceArticle;
 import com.afpa59.patrice.service.fichier.ServiceClient;
 import com.afpa59.patrice.service.fichier.ServiceCommande;
 import com.afpa59.patrice.utils.DateUser;
-import com.afpa59.patrice.utils.ES;
 import com.afpa59.patrice.utils.ESpane;
 
 
@@ -152,10 +151,10 @@ public class IuCommande extends IuBase implements ActionListener {
 			numOrd= s3.getTabCdes().size()+1;
 			numCde = ""+dateJ.getAnnee()+dateJ.getMois()+dateJ.getJour()+numOrd;
 			
-			numClient = ES.saisie("Veuillez choisir le client", 1, Integer.MAX_VALUE);
+//			numClient = ES.saisie("Veuillez choisir le client", 1, Integer.MAX_VALUE);
 			
 			/*******************DEBUGING*******************************/
-			ESpane.affiche("Création Cde num: " + numCde);
+//			ESpane.affiche("Création Cde num: " + numCde);
 			/*******************DEBUGING*******************************/
 			
 			new IuUneCommande(s1,s2, s3);

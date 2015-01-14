@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -115,7 +114,7 @@ public class IuGeneral extends IuBase implements ActionListener{
 		container.add(b4);
 
 
-		this.setSize(1000,1000); //LARGEUR * HAUTEUR de la frame
+		this.setSize(750,800); //LARGEUR * HAUTEUR de la frame
 		this.setMinimumSize(new Dimension(550, 550)); // Définir une taille de fenetre minimum		
 		this.setLocationRelativeTo(null); // pour centrer le container
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

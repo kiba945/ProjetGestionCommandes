@@ -8,7 +8,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.afpa59.patrice.donnees.Commande;
-import com.afpa59.patrice.donnees.Client;
 import com.afpa59.patrice.utils.DateUser;
 
 
@@ -29,8 +28,8 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 
 	public void setTabCdes(Hashtable<String,Commande> tableDesCommandes){tabCdes = tableDesCommandes;}
 
+	@Override
 	public String toString(){
-		Client client = 
 		Enumeration<Commande> em = tabCdes.elements();
 		String st = new String();
 		while(em.hasMoreElements()){
@@ -39,8 +38,8 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 			+ Cde.getCodeCde()
 			+ " Date Cde : "
 			+ Cde.getDateCde()
-			+ " à "
-			+ Cde.getCodeClt()
+//			+ " à "
+//			+ Cde.getCodeClt()
 			+ " "
 			+ Cde.toString()+st;
 		}
@@ -118,8 +117,8 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 			Commande cde = new Commande();
 			
 			/* ************** DEBUGGING ************************** */
-			System.out.println("Je suis dans de la classse ServiceCommande"
-					+ " dans la méthode readData()");	
+//			System.out.println("Je suis dans de la classse ServiceCommande"
+//					+ " dans la méthode readData()");	
 						
 			
 			String dateCde[] = s.split("/");
@@ -160,15 +159,15 @@ public class ServiceCommande extends ServiceBase implements Serializable{	// !!!
 		
 		
 		/* ************** DEBUGGING ************************** */
-		System.out.println("Je suis dans de la classse ServiceCommande"
-				+ " dans la méthode writeData()");	
+//		System.out.println("Je suis dans de la classse ServiceCommande"
+//				+ " dans la méthode writeData()");	
 //		System.out.println("Contenu du Code:" + tabCdes.elements().nextElement().getCode());
 //		System.out.println("Contenu du Code:" + tabCdes.elements().nextElement().getUneCommande());
 //		System.out.println("Contenu du Code:" + tabCdes.elements().nextElement().getCode());
 //		System.out.println("Contenu tabCdes:" + tabCdes.elements().nextElement().toString());
-		System.out.println();
-		System.out.println("Taille de ma tabCde: " +tabCdes.size());
-				
+//		System.out.println();
+//		System.out.println("Taille de ma tabCde: " +tabCdes.size());
+//				
 		
 		// écrire le nombre d'articles
 //		out.println(tabCdes.size());

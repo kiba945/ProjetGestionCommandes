@@ -33,9 +33,9 @@ public class ConnectionFichiersCommandes{
 			
 			
 			/* ************** DEBUGGING ************************** */
-			System.out.println("Je suis dans de la classse ConnectionFichiersCommandes"
-					+ " dans le constructeur ConnectionFichiersCommandes");	
-			System.out.println(ServiceCde.getTabCdes().toString());
+//			System.out.println("Je suis dans de la classse ConnectionFichiersCommandes"
+//					+ " dans le constructeur ConnectionFichiersCommandes");	
+//			System.out.println(ServiceCde.getTabCdes().toString());
 			/* *************************************************** */				
 
 			in.close();
@@ -43,8 +43,8 @@ public class ConnectionFichiersCommandes{
 		} catch (FileNotFoundException e) {
 
 			/* ************** DEBUGGING ************************** */
-			System.out.println("Je suis dans le catch de l'exception FileNotFoundException"
-					+ " de la classse ConnectionFichiersCommandes");
+//			System.out.println("Je suis dans le catch de l'exception FileNotFoundException"
+//					+ " de la classse ConnectionFichiersCommandes");
 			
 			/* *************************************************** */			
 			
@@ -80,9 +80,9 @@ public class ConnectionFichiersCommandes{
 		} catch (FileNotFoundException e) {
 			
 			/* ************** DEBUGGING ************************** */
-			System.out.println("Je suis dans le catch de l'exception FileNotFoundException"
-					+ " de la classse ConnectionFichiersCommandes"
-					+ " dans la méthode ecrire()");
+//			System.out.println("Je suis dans le catch de l'exception FileNotFoundException"
+//					+ " de la classse ConnectionFichiersCommandes"
+//					+ " dans la méthode ecrire()");
 			
 			/* *************************************************** */	
 			

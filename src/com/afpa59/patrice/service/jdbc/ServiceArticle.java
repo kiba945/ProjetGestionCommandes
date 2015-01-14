@@ -4,7 +4,6 @@ import com.afpa59.patrice.donnees.Article;
 import com.afpa59.patrice.service.jdbc.ServiceBase;
 import com.afpa59.patrice.service.jdbc.ServiceArticle;
 import com.afpa59.patrice.utils.ConnectionJDBC;
-import com.afpa59.patrice.utils.ES;
 
 import java.io.IOException;
 import java.io.Serializable;

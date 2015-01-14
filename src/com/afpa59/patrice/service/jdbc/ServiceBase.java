@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import com.afpa59.patrice.donnees.Article;
-import com.afpa59.patrice.donnees.Client;
 import com.afpa59.patrice.donnees.Entite;
 import com.afpa59.patrice.service.commun.ServiceEntite;
 

@@ -20,6 +20,14 @@ public class ServiceClient extends ServiceBase implements Serializable{
 	/****************************************/
 	private ArrayList<Client> tabClient = new ArrayList<Client>();
 	
+	public ArrayList<Client> getTabClient() {
+		return tabClient;
+	}
+
+	public void setTabClient(ArrayList<Client> tabClient) {
+		this.tabClient = tabClient;
+	}
+
 	/************************************/
 	/*	Déclaration des constructeurs	*/
 	/************************************/
