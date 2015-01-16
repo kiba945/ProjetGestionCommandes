@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.7" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="com.afpa59.patrice.service.commun" project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/commun" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="232" x="53" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="2" language="java" name="com.afpa59.patrice.service.commun.ServiceEntite" 
+    project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/commun/ServiceEntite.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="240" x="965" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="3" language="java" name="com.afpa59.patrice.service.fichier" project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/fichier" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="218" x="325" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="com.afpa59.patrice.service.fichier.ServiceArticle" 
+    project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/fichier/ServiceArticle.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="247" x="396" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.afpa59.patrice.service.fichier.ServiceBase" project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/fichier/ServiceBase.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="240" x="583" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.afpa59.patrice.service.fichier.ServiceClient" project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/fichier/ServiceClient.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="242" x="683" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.afpa59.patrice.service.fichier.ServiceCommande" 
+    project="ProjetGestionCommandes" 
+    file="/ProjetGestionCommandes/src/com/afpa59/patrice/service/fichier/ServiceCommande.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="423" width="303" x="53" y="338"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

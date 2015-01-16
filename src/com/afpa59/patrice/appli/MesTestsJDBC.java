@@ -10,17 +10,15 @@ import com.afpa59.patrice.service.jdbc.ServiceClient;
 import com.afpa59.patrice.service.jdbc.ServiceArticle;
 import com.afpa59.patrice.service.jdbc.ServiceCommande;
 
-public class MesTests {
+public class MesTestsJDBC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ServiceArticle serviceA;
 		ServiceClient serviceClt;
-		ServiceCommande serviceCde;
 		
 		IuArticle IuArt;
 		IuClient IuClt;	
-		IuCommande IuCde;
 		
 
 		/************** TEST MODULE GESTION ARTICLES***************************/	
@@ -50,23 +48,7 @@ public class MesTests {
 		}
 
 		IuClt = new IuClient(serviceClt);
-		/**********************************************************************/		
-
-		/************** TEST MODULE GESTION COMMANDES***************************/	
-		serviceCde = new ServiceCommande();
-		
-
-		try {
-			serviceCde.readData();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("EXCEPTION Test MODULE GESTION Commandes");
-			e.printStackTrace();
-			
-		}
-
-		IuCde = new IuCommande(serviceA, serviceClt, serviceCde);
-		/**********************************************************************/		
+		/**********************************************************************/			
 
 	}
 

@@ -125,7 +125,7 @@ public class IuArticle extends IuBase implements ActionListener{
 		contain.add(p1);
 		this.setSize(750,300); //LONGUEUR * HAUTEUR de la frame
 		//pack();
-		this.setLocationRelativeTo(null); // POUR CENTRER LA FRAME
+//		this.setLocationRelativeTo(null); // POUR CENTRER LA FRAME
 		setMinimumSize(new Dimension(550, 200)); // Définir une taille de fenetre minimum
 		this.setVisible(true);
 		//show();
